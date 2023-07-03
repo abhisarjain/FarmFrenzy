@@ -1,0 +1,95 @@
+{% extends 'homepage.html' %}
+
+
+
+{% block css %}
+body{
+  min-height: 100vh;
+  width: 100%;
+  background: #198754;
+}
+.container2{
+  
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+.form input,textarea{
+  height: 60px;
+  width: 100%;
+  padding: 0 15px;
+  font-size: 17px;
+  margin-bottom: 1.3rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+}
+.form input,textarea:focus{
+  box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+}
+.cb{
+  max-height:15px;
+ padding:0px;
+ max-width:10px;
+ margin-right:10px;
+ 
+}
+{% endblock css %}
+  
+
+
+
+{% block body %}
+
+
+
+{% for crop in crops %}
+  <div class="container">
+    
+
+
+    <div class="container  my-3">
+      <div class="card cardhover ">
+        <div class="card-header">
+          By You
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{crop.name}} of {{crop.type}} type and {{crop.variety}} variety </h5>
+          <p class="card-text">{{crop.description}}</p>
+    
+          
+        </div>
+        <div class="card-footer text-muted">
+         Price per Kg : {{crop.price_per_kg}} <br>
+         Quantity Available : {{crop.quantity}} <br>
+         Shelf Life : {{crop.shelf_life}}
+        </div>
+      </div>
+    </div><br><br>
+    
+    {% if user.is_seller %}
+    
+    {% else %}
+    <div class="container2 w-100">
+    <form action="" method="post" class="form p-3">{% csrf_token %}
+     
+          <input type="number"  placeholder="Enter Quantity" name = "quantity">
+          
+          <div class="form-check">
+            <input class="form-check-input cb" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              I agree to the terms and conditions and the above agreement is binding.
+            </label>
+          </div>
+        <br>
+        <button type = "submit" class ="btn btn-success"> Buy without Negotiation</button></form></div>
+    {% endif %}
+
+
+
+
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}

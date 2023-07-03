@@ -1,0 +1,54 @@
+{% extends 'homepage.html' %}
+
+
+{% block css %}
+body{
+  min-height: 100vh;
+  width: 100%;
+  background: #198754;
+}
+{% endblock css %}
+  
+{% block body %}
+{% for neg in negs %}
+<div class="container w-75 my-3">
+  <div class="card cardhover ">
+    <div class="card-header">
+      By You
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"> {{neg.crop.name}} </h5>
+      <p class="card-text"> {{neg.desc}}</p>
+
+      {% if neg.bought %}
+      <button class="btn btn-success" disabled>Successfully Bought by Buyer</button>
+      {% else %}
+        
+        
+        {% if neg.awaited %}
+        <form action="/sellernegotiations/accept/{{neg.id}}" style="float:left; " class= "mx-2" method="post">{% csrf_token %}
+            <button class="btn btn-success">Accept</button></form>
+            <form action="/sellernegotiations/reject/{{neg.id}}"  method="post">{% csrf_token %}
+            <button class="btn btn-danger">Reject</button></form>
+        {% else %}
+
+        {% if neg.accepted %}
+        <button class="btn btn-success" disabled>Accepted by You</button>
+        {% else %}
+        <button class="btn btn-danger" disabled>Rejected by You</button>
+        {% endif %}
+        {% endif %}
+        {% endif %}
+        
+      
+    </div>
+    <div class="card-footer text-muted">
+        Proposed Price : {{neg.proposed_price}} <br>
+        Original Price : {{neg.crop.price_per_kg}} <br>
+       Quantity : {{neg.quantity}}
+    </div>
+  </div>
+</div><br><br>
+
+{% endfor %}
+{% endblock %}

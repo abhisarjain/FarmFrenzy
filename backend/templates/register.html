@@ -1,0 +1,146 @@
+{% extends 'homepage.html' %}
+
+
+
+{% block css %}
+
+
+
+body{
+  min-height: 100vh;
+  width: 100%;
+  background: #198754;
+}
+.container{
+  position: center;
+  margin-top:60px;
+  margin-bottom:60px;
+  max-width: 430px;
+  width: 100%;
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+.container .registration{
+  display: none;
+}
+#check:checked ~ .registration{
+  display: block;
+}
+#check:checked ~ .login{
+  display: none;
+}
+#check{
+  display: none;
+}
+.container .form{
+  padding: 2rem;
+}
+.form header{
+  font-size: 2rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+ .form input{
+   height: 60px;
+   width: 100%;
+   padding: 0 15px;
+   font-size: 17px;
+   margin-bottom: 1.3rem;
+   border: 1px solid #ddd;
+   border-radius: 6px;
+   outline: none;
+ }
+ .form input:focus{
+   box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+ }
+.form a{
+  font-size: 16px;
+  color: #009579;
+  text-decoration: none;
+}
+.form a:hover{
+  text-decoration: underline;
+}
+.form input.button{
+  color: #fff;
+  background: #198754;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-top: 1.7rem;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.form input.button:hover{
+  background: #006653;
+}
+ .signup{
+  font-size: 17px;
+  text-align: center;
+}
+.signup label{
+  color: #198754;
+  cursor: pointer;
+}
+.signup label:hover{
+  text-decoration: underline;
+} 
+  
+{% endblock css %}
+
+  
+
+
+
+{% block body %}
+{% comment %} <form action="" method="post">{% csrf_token %}
+
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">
+        <label for="floatingInput">username</label>
+      </div>
+
+<div class="form-floating mb-3">
+    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
+    <label for="floatingInput">Email address</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="firstname">
+    <label for="floatingInput">first name</label>
+  </div>
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="lastname">
+    <label for="floatingInput">last name</label>
+  </div>
+  <div class="form-floating">
+    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+    <label for="floatingPassword">Password</label>
+    
+    <button class="btn btn-primary">register</button>
+  </div></form> {% endcomment %}
+
+  <div class="container">
+    <input type="checkbox" id="check">
+    <div class="login form">
+      <header>Signup</header>
+      <form action="" method = "post"> {% csrf_token %}
+        <input type="text" placeholder="Enter your username" name = "username">
+        <input type="text" placeholder="Enter your firstname" name = "firstname">
+        <input type="text" placeholder="Enter your lastname" name = "lastname">
+
+        <input type="email" placeholder="Enter your email" name = "email">
+
+        <input type="password" placeholder="Enter your password" name="password">
+
+        {% comment %} <a href="#">Forgot password?</a> {% endcomment %}
+        <input type="submit" class="button" value="Signup">
+      </form>
+      <div class="signup">
+        <span class="signup">Already have an account ? 
+         <label for="check" >Login</label>
+        </span>
+      </div>
+    </div><div>
+{% endblock body %}

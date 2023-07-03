@@ -1,0 +1,66 @@
+{% extends 'homepage.html' %}
+
+{% block css %}
+body{
+  min-height: 100vh;
+  width: 100%;
+  background: #198754;
+}
+.card{
+  
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+  }
+  
+{% endblock css %}
+{% block body %}
+<div class="container w-75 my-3">
+    <div class="card cardhover ">
+      <div class="card-header">
+        Developed By : Abhisar Jain, Aditya Sahai, Aman Sharma
+      </div>
+      <div class="card-body">
+        <h5 class="card-title" style="text-align:center;">About FarmFrenzy</h5>
+        <p style="">At FarmFrenzy, we are revolutionizing the way farmers engage in the commodity crop market. Our B2B marketplace platform is dedicated to connecting farmers with buyers, streamlining the agricultural supply chain, and empowering farmers to maximize their profits.
+
+           <br><br> Our platform serves as a digital marketplace where farmers can showcase their high-quality commodity crops to potential buyers, eliminating geographical barriers and enabling seamless trade across regions. We understand the challenges faced by farmers in accessing fair markets, negotiating prices, and finding reliable buyers. Our platform addresses these pain points by providing a transparent, efficient, and secure platform for farmers to showcase and sell their crops.</p>
+  
+        
+      </div>
+      <div class="card-footer text-muted">
+      
+      </div>
+    </div>
+  </div><br><br>
+
+
+  {% comment %} <div class="card-group w-75" style="margin:auto;">
+
+    <div class="card mx-2">
+      <img src="F:/farmfrenzy/farmfrenzy/backend/templates/abhi.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title" style="text-align:center;">Abhisar Jain</h5>
+        
+      </div>
+    </div>
+
+    <div class="card mx-2" >
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title" style="text-align:center;">Aditya Sahai</h5>
+    
+      </div>
+    </div>
+
+    <div class="card mx-2">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title" style="text-align:center;">Aman Sharma</h5>
+        
+      </div>
+    </div>
+
+  </div> {% endcomment %}
+{% endblock body %}
+    

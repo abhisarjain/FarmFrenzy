@@ -1,0 +1,124 @@
+{% extends 'homepage.html' %}
+
+
+{% block css %}
+body{
+  min-height: 100vh;
+  width: 100%;
+  background: #198754;
+}
+.card{
+  
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+.form input,textarea{
+  height: 60px;
+  width: 100%;
+  padding: 0 15px;
+  font-size: 17px;
+  margin-bottom: 1.3rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+}
+.form input,textarea:focus{
+  box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+}
+
+.lb{
+  
+  
+ 
+}
+
+{% endblock css %}
+  
+
+{% block body %}
+
+{% if user.is_authenticated and user.is_seller %}
+<div class="container w-25">
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-light lb my-3 mx-5"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+ Add new Crop
+</button></div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add a new Crop</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Modal body starts-->
+
+       <div class="container">
+        <div class="login form">
+        <form action="" method="post">{% csrf_token %}
+          <input type="text" placeholder="Enter the crop name" name="cropname">
+          <input type="text" placeholder="Enter the crop variety" name = "cropvariety">
+          <input type="text" placeholder="Enter the crop type" name = "croptype">
+          <input type="number" placeholder="Enter price per kg" name = "ppkg">
+          <input type="number" placeholder="Enter shelf size" name = "shelflife">
+          <input type="number" placeholder="Enter the quantity" name = "quant">
+          <textarea type="textarea" placeholder="Enter the crop description" name = "desc"></textarea>
+          
+
+          
+         
+        
+       </div></div>
+
+        <!-- Modal body ends-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Add</button></form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% for crop in crops %}
+<div class="container w-75 my-3">
+  <div class="card cardhover ">
+    <div class="card-header">
+      By You
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{crop.name}} of {{crop.type}} type and {{crop.variety}} variety </h5>
+      <p class="card-text">{{crop.description|truncatechars:300}}</p>
+
+      <div class="dropdown">
+        <a class="btn btn-success  dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          Options
+      </a>
+
+        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
+          <li><a class="dropdown-item" href="/crops/{{crop.id}}">Read More</a></li>
+          <li><a class="dropdown-item" href="/mycrops/editcrop/{{crop.id}}">Edit</a></li>
+          <li><a class="dropdown-item" href="/mycrops/deletecrop/{{crop.id}}">Delete</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+     Price per Kg : {{crop.price_per_kg}} <br>
+     Quantity Available : {{crop.quantity}} <br>
+     Shelf Life : {{crop.shelf_life}}
+    </div>
+  </div>
+</div><br><br>
+
+{% endfor %}
+
+{% else %}
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'homepage.html' %}
+
+{% block css %}
+
+.farm{
+    color:white;
+    padding-left:437px; 
+    font-size:4.5rem;
+    font-family:monospace;
+}
+.container{
+    background:black;
+    width: 100%;
+    height:850px;
+    max-width:1536px;
+    opacity:0.5;
+}
+
+.welcome{
+    color:white;
+    padding-top:267px;
+    font-size:5.5rem;
+    padding-left:60px;
+    
+    
+}
+{% endblock css %}
+    
+{% block body %}
+
+{% if user.is_authenticated %}
+<div class="container">
+<h1 class="welcome">WELCOME Back</h1> 
+
+
+
+{% if user.is_seller %}
+
+<h1 class="farm"> Farmer {{request.user.get_full_name}}</h1>
+
+{% else %}
+<h1 class="farm"> Buyer {{request.user.get_full_name}}</h1></div>
+{% endif %}
+
+{% else %}
+<div class="container">
+<h1 class="welcome">WELCOME TO</h1>
+<h1 class="farm"> FarmFrenzy</h1></div>
+
+{% endif %}
+{% endblock %}

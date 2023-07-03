@@ -1,0 +1,43 @@
+{% extends 'homepage.html' %}
+
+
+{% block css %}
+body{
+  min-height: 100vh;
+  width: 100%;
+  background: #198754;
+}
+.card{
+  
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+  }
+  
+{% endblock css %}
+
+
+{% block body %}
+{% for order in orders %}
+<div class="container w-75 my-3">
+  <div class="card cardhover ">
+    <div class="card-header">
+      Sold By {{order.crop.seller.get_full_name}} 
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{order.crop.name}} of {{order.crop.type}} type and {{order.crop.variety}} variety </h5>
+      {% comment %} <p class="card-text">{{crop.description|truncatechars:300}}</p> {% endcomment %}
+
+      <button class="btn btn-success" disabled>Successfully Bought</button>
+    </div>
+    <div class="card-footer text-muted">
+     Price per Kg : {{order.crop.price_per_kg}} <br>
+     Price at which you have bought : {{order.price}} <br>
+     Quantity Bought : {{order.quantity_bought}} <br>
+     Shelf Life : {{order.crop.shelf_life}}
+    </div>
+  </div>
+</div><br><br>
+{% endfor %}
+
+{% endblock %}

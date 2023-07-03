@@ -1,0 +1,55 @@
+{% extends 'homepage.html' %}
+
+
+{% block css %}
+body{
+  min-height: 100vh;
+  width: 100%;
+  background: #198754;
+}
+  
+{% endblock css %}
+  
+
+
+{% block body %}
+{% for neg in negs %}
+<div class="container w-75 my-3">
+  <div class="card cardhover ">
+    <div class="card-header">
+      By You
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"> {{neg.crop.name}} of {{neg.crop.type}} type and {{neg.crop.variety}} variety </h5>
+      <p class="card-text"> {{neg.desc}}</p>
+      {% if neg.bought %}
+      <button class="btn btn-success" disabled>Successfully Bought by you</button>
+      {% else %}
+      {% if neg.awaited %}
+      <button class="btn btn-warning" disabled>Awaited</button>
+      {% else %}
+        {% if neg.accepted %}
+        <button class="btn btn-success mx-2" disabled style="float:left;" >Accepted by Seller</button>
+        <form action="/buyernegotiations/buynow/{{neg.id}}" method="post">{% csrf_token %}
+        <button class = "btn btn-success">Buy Now</button></form>
+        
+        {% else %}
+        <button class="btn btn-danger" disabled>Rejected by seller</button>
+        {% endif %}
+
+      {% endif %}
+        {% endif %}
+
+        
+      
+    </div>
+    <div class="card-footer text-muted">
+      Proposed Price by you : {{neg.proposed_price}} <br>
+      Original Price : {{neg.crop.price_per_kg}} <br>
+      Quantity : {{neg.quantity}}
+    </div>
+  </div>
+</div><br><br>
+
+{% endfor %}
+{% endblock %}

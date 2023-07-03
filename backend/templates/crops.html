@@ -1,0 +1,42 @@
+{% extends 'homepage.html' %}
+{% block css %}
+body{
+  min-height: 100vh;
+  width: 100%;
+  background: #198754;
+}
+  
+{% endblock css %}
+{% block body %}
+
+{% if user.is_authenticated and not user.is_seller %}
+
+{% for crop in crops %}
+
+
+
+
+
+<div class="container w-75 my-3" >
+<div class="card ">
+  <div class="card-header">
+    By {{crop.seller.get_full_name}}  <a href="/aboutuser/{{crop.seler.id}}"> (@{{crop.seller.username}}) </a>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{crop.name}} of {{crop.type}} type and {{crop.variety}} variety</h5>
+    <p class="card-text">{{crop.description|truncatechars:300}}</p>
+    <a href="/crops/{{crop.id}}" id="{{crop.name}}" class="btn btn-success">Know More or Buy</a>
+    <a href="/crops/negotiate/{{crop.id}}" id="{{crop.name}}" class="btn btn-success">Negotiate</a>
+  </div>
+  <div class="card-footer">
+    Price per Kg : {{crop.price_per_kg}} <br>
+    Quantity Available : {{crop.quantity}} <br>
+    Shelf Life : {{crop.shelf_life}}
+  </div>
+</div></div>
+{% endfor %}
+{% else %}
+{% endif %}
+
+
+{% endblock %}
